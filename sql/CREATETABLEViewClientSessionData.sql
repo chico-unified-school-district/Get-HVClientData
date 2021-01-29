@@ -1,0 +1,22 @@
+CREATE TABLE ViewClientSessionData (
+    EventID int NOT NULL IDENTITY(1,1) PRIMARY KEY,
+    UserName varchar(100) NOT NULL,
+    AgentVersion varchar(100) null,
+    ApplicationNames varchar(100) null,
+    ClientAddress varchar(100) null,
+    ClientLocationID varchar(100) null,
+    ClientName varchar(100) null,
+    ClientType varchar(100) null,
+    ClientVersion varchar(100) null,
+    DesktopName varchar(100) null,
+    DesktopPoolCN varchar(100) null,
+    DesktopSource varchar(100) null,
+    DesktopType varchar(100) null,
+    FarmName varchar(100) null,
+    MachineOrRDSServerDNS varchar(100) null,
+    MachineOrRDSServerName varchar(100) null,
+    SecurityGatewayAddress varchar(100) null,
+    SecurityGatewayDNS varchar(100) null,
+    SecurityGatewayLocation varchar(100) null,
+    DTS datetime NOT NULL
+)

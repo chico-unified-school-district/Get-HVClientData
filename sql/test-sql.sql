@@ -1,0 +1,2 @@
+INSERT INTO ViewClientSessionData ( UserName,AgentVersion,ApplicationNames,ClientAddress,ClientLocationID,ClientName,ClientType,ClientVersion,DesktopName,DesktopPoolCN,DesktopSource,DesktopType,FarmName,MachineOrRDSServerDNS,MachineOrRDSServerName,SecurityGatewayAddress,SecurityGatewayDNS,SecurityGatewayLocation,DTS) VALUES
+('chico.usd\AF87914','7.10.0',,,,'Other',,'CS-ITECH','cs-itech','UNMANAGED','MANUAL',,'cs-it1-117.chico.usd','cs-it1-117.chico.usd',,,'Unknown','2021-01-28 10:56:35Z');
