@@ -1,4 +1,4 @@
-function Invoke-SqlCommand
+function Run-SQLCMD
 {
 	[cmdletbinding()]
 	param
