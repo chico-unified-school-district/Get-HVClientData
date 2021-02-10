@@ -22,7 +22,7 @@ function Run-SQLCMD
  $BSTR = [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($password)
  $unsecurePassword = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto($BSTR)
 
- Write-Verbose "Running SQL Command against $Connection as $user"
+ Write-Verbose ('Running SQL Command against {0}\{1} as {2}' -f $Server, $Database, $Credential.Username)
  if ($WhatIf){ $SqlCommand }
  else{
   if (Test-Connection -ComputerName $Server -Count 1 -Quiet){  

@@ -1,6 +1,6 @@
 CREATE TABLE ViewClientSessionData (
-    EventID int NOT NULL IDENTITY(1,1) PRIMARY KEY,
-    UserName varchar(100) NOT NULL,
+    EventID int NOT NULL PRIMARY_KEY,
+    UserName varchar(100) null,
     AgentVersion varchar(100) null,
     ApplicationNames varchar(100) null,
     ClientAddress varchar(100) null,
@@ -18,5 +18,5 @@ CREATE TABLE ViewClientSessionData (
     SecurityGatewayAddress varchar(100) null,
     SecurityGatewayDNS varchar(100) null,
     SecurityGatewayLocation varchar(100) null,
-    DTS datetime NOT NULL
+    DTS datetime DEFAULT(getdate())
 )
