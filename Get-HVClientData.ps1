@@ -1,16 +1,19 @@
 <#
 .SYNOPSIS
- 
+ Collects Horizon View session data and writes data to a SQL server database. 
 .DESCRIPTION
- 
+ Collects Horizon View session data and writes data to a SQL server database.
+ Requires HV Connection Server
 .PARAMETER Server
  A vCenter server name
 .PARAMETER Credential
 .PARAMETER WhatIf
  Switch to turn testing mode on or off.
 .EXAMPLE
+.\Get-VDIClientData.ps1 -hvserver hvserver.mydomain.edu -hvCredential $hvCredObj -SQLServer mssql.mydomain.edu -Database ViewClientSessionsDB -TableName ViewClientSessionDataTable -SQLCredential $nativeMSSQLCredObj
+.EXAMPLE
+.\Get-VDIClientData.ps1 -hvserver hvserver.mydomain.edu -hvCredential $hvCredObj -SQLServer mssql.mydomain.edu -Database ViewClientSessionsDB -TableName ViewClientSessionDataTable -SQLCredential $nativeMSSQLCredObj -WhatIf -Verbose -Debug
 .INPUTS
-
 .OUTPUTS
  Log messages are output to the console.
 .NOTES
@@ -120,20 +123,20 @@ $sqlParams = @{
  Credential    = $SQLCredential
 }
 
-# Cleanup old database entries
-$cleanupCMD = "DELETE FROM $Tablename WHERE DTS < DATEADD(day, -180,getdate())"
-Run-SQLCMD @sqlParams -SQLCMD $cleanupCMD -Whatif:$WhatIf
-
-if ($hvClientDataOld){
+# if ($hvClientDataOld){
  # Add-Log sqltable ('Adding data to {0}' -f $TableName)
  # $initialInsertSQL = formatClientDataSQL -table $TableName -hvNamesdata $hvClientDataOld
  # Write initial connection results
  # Run-SQLCMD @sqlParams -SQLCMD $initialInsertSQL -Whatif:$WhatIf
-}
+# }
 
-$endTime = Get-Date "11:59pm" # SHould run 23.99ish hours a day.
 do {
  Write-Verbose "Running Loop"
+
+ # Cleanup old database entries
+ $cleanupCMD = "DELETE FROM $Tablename WHERE DTS < DATEADD(day, -180,getdate())"
+ Run-SQLCMD @sqlParams -SQLCMD $cleanupCMD -Whatif:$WhatIf
+
  # Check hv connection server session
  checkAllHVServers -hvServers $allHvServers -hvCred $HVCredential
 
@@ -166,8 +169,7 @@ do {
  $delayTime = 10
  if (!$WhatIf) {Start-Sleep $delayTime}
 
-} until ( $WhatIf )
-# } until ( $WhatIf -or ( (Get-date) -ge $endTime ) )
+} until ( $WhatIf ) # Runs forever unless -whatif specified.
 
 # Cleanup
 if ($global:DefaultHVServers) { Disconnect-HVServer -Server * -Force -Confirm:$false }
