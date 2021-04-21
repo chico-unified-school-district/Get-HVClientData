@@ -165,7 +165,8 @@ do {
  if ($newHVEntries){
   Write-Verbose "Formatting new entries"
   $latestInsertSQL = formatClientDataSQL -table $TableName -hvNamesdata $newHVEntries
-  $newHVEntries
+  Write-Verbose ( $newHVEntries | Out-String )
+  $newHVEntries.UserName
   # Read-Host "Wait and check the sql...."
   Write-Verbose "Writing new entries"
   Run-SQLCMD @sqlParams -SQLCMD $latestInsertSQL -Whatif:$WhatIf
@@ -175,8 +176,8 @@ do {
  $hvClientDataOld = $hvClientDataNew
 
  # Loop delay time in seconds
- $delayTime = 10
- if (!$WhatIf) {Start-Sleep $delayTime}
+ # $delayTime = 10
+ # if (!$WhatIf) {Start-Sleep $delayTime}
 
 } until ( $WhatIf ) # Runs forever unless -whatif specified.
 
