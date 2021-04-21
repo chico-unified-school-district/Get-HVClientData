@@ -1,21 +1,30 @@
 <#
 .SYNOPSIS
- Collects Horizon View session data and writes data to a SQL server database. 
+ Collects Horizon View session data and writes data to a SQL server database.
 .DESCRIPTION
  Collects Horizon View session data and writes data to a SQL server database.
- Requires HV Connection Server
-.PARAMETER Server
- A vCenter server name
-.PARAMETER Credential
+ Requires HV Connection Server, the VMware.VimAutomation.HorizonView module, and an SQL Server Database
+.PARAMETER HVConnectionServer
+ A Horizon View Connection Server
+.PARAMETER HVCredential
+Horizon View Connection Server Active Directory Account Credentail Object with read access to the HV Server data.
+.PARAMETER SQLServer
+Microsoft SQL Server or SQL Server Express DNS name
+.PARAMETER DATABASE
+Microsoft SQL Server or SQL Server Express target database name
+.PARAMETER TableName
+Microsoft SQL Server or SQL Server Express target database table name
+.PARAMETER SQLCredential
+Native Microsoft SQL Server or SQL Server Express account with UPDATE/INSERT/Remtoe Connection access to target database and table
 .PARAMETER WhatIf
- Switch to turn testing mode on or off.
+Switch to turn testing mode on or off.
 .EXAMPLE
-.\Get-VDIClientData.ps1 -hvserver hvserver.mydomain.edu -hvCredential $hvCredObj -SQLServer mssql.mydomain.edu -Database ViewClientSessionsDB -TableName ViewClientSessionDataTable -SQLCredential $nativeMSSQLCredObj
+.\Get-HVClientData.ps1 -hvserver hvserver.mydomain.edu -hvCredential $hvCredObj -SQLServer mssql.mydomain.edu -Database ViewClientSessionsDB -TableName ViewClientSessionDataTable -SQLCredential $nativeMSSQLCredObj
 .EXAMPLE
-.\Get-VDIClientData.ps1 -hvserver hvserver.mydomain.edu -hvCredential $hvCredObj -SQLServer mssql.mydomain.edu -Database ViewClientSessionsDB -TableName ViewClientSessionDataTable -SQLCredential $nativeMSSQLCredObj -WhatIf -Verbose -Debug
+.\Get-HVClientData.ps1 -hvserver hvserver.mydomain.edu -hvCredential $hvCredObj -SQLServer mssql.mydomain.edu -Database ViewClientSessionsDB -TableName ViewClientSessionDataTable -SQLCredential $nativeMSSQLCredObj -WhatIf -Verbose -Debug
 .INPUTS
 .OUTPUTS
- Log messages are output to the console.
+ Log messages are output to the console. SQL data written to MSSQL database
 .NOTES
 "HV" in the context of this script is shorthand for "Horizon View"
 
