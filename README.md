@@ -1,4 +1,4 @@
-# Get-VDIClientData
+# Get-HVClientData
 
 Retrieve and store client session data for VMware Horizon View.
 
