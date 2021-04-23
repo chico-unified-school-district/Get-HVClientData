@@ -25,7 +25,7 @@ function Run-SQLCMD
  Write-Verbose ('Running SQL Command against {0}\{1} as {2}' -f $Server, $Database, $Credential.Username)
  if ($WhatIf){ $SqlCommand }
  else{
-  if (Test-Connection -ComputerName $Server -Count 1 -Quiet){  
+  if (Test-Connection -ComputerName $Server -Count 3 -Quiet){
    $ServerInstance = "$Server ";$Database = "$DataBase";$ConnectionTimeout = 60;$QueryTimeout = 120
    $conn=new-object System.Data.SqlClient.SQLConnection
    $ConnectionString = "Server={0};Database={1};Connect Timeout={2};User Id=$User;Password=$unsecurePassword" `

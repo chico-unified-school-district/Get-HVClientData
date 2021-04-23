@@ -4,6 +4,7 @@
 .DESCRIPTION
  Collects Horizon View session data and writes data to a SQL server database.
  Requires HV Connection Server, the VMware.VimAutomation.HorizonView module, and an SQL Server Database
+ Set to terminate at 11:55pm
 .PARAMETER HVConnectionServer
  A Horizon View Connection Server
 .PARAMETER HVCredential
@@ -179,7 +180,7 @@ do {
  # $delayTime = 10
  # if (!$WhatIf) {Start-Sleep $delayTime}
 
-} until ( $WhatIf ) # Runs forever unless -whatif specified.
+} until ( $WhatIf -or ( (Get-Date) -ge (Get-Date '11:55pm') ) ) # Runs forever unless -whatif specified.
 
 # Cleanup
 if ($global:DefaultHVServers) { Disconnect-HVServer -Server * -Force -Confirm:$false }
